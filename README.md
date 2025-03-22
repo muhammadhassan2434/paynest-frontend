@@ -1,51 +1,86 @@
-# Welcome to your Expo app 👋
+Paynest Mobile Wallet Application (Pakistan)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Overview
 
-## Get started
+This project aims to develop a mobile wallet application tailored to the needs of users in Pakistan. It provides essential financial management features, including user registration, wallet balance management, transaction history, and bill payments. Due to the complexities of obtaining an Electronic Money Institution (EMI) license from the State Bank of Pakistan, dummy records will be used to demonstrate technical functionality.
 
-1. Install dependencies
+Features
 
-   ```bash
-   npm install
-   ```
+User Registration & Authentication: Secure sign-up and login system.
 
-2. Start the app
+Wallet Balance Management: View and manage wallet funds.
 
-   ```bash
-    npx expo start
-   ```
+Transaction History: Track all transactions in a user-friendly interface.
 
-In the output, you'll find options to open the app in a
+Bill Payments: Pay utility bills and other expenses seamlessly.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Split Bills: Share expenses easily with friends and family.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+Bill Reminders & Scheduling: Receive notifications for upcoming bills and automate payments.
 
-## Get a fresh project
+Monthly Financial Reports: Generate insightful reports on spending habits.
 
-When you're ready, run:
+Voice Command Payments: Use voice commands to make payments, check balances, and access reports hands-free.
 
-```bash
-npm run reset-project
-```
+Technology Stack
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Frontend: React Native (for cross-platform mobile development)
 
-## Learn more
+Backend: Laravel (for API and business logic)
 
-To learn more about developing your project with Expo, look at the following resources:
+Database: MySQL / PostgreSQL
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Authentication: Laravel Sanctum / Firebase Authentication
 
-## Join the community
+Notifications: Firebase Cloud Messaging (FCM) for real-time alerts
 
-Join our community of developers creating universal apps.
+Installation Guide
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-# paynest-frontend
+Prerequisites
+
+Ensure you have the following installed:
+
+Node.js & npm
+
+React Native development environment (Android/iOS setup)
+
+Steps to Install
+
+Clone the repository:
+
+git clone https://github.com/muhammadhassan2434/paynest-frontend.git
+
+
+Install frontend dependencies:
+
+cd ../frontend
+npm install
+
+Run the React Native app:
+
+npx react-native run-android # For Android
+npx react-native run-ios # For iOS (Mac required)
+
+Usage
+
+Register as a new user and log in.
+
+Add funds to the wallet (dummy data for testing).
+
+Make payments, split bills, and schedule recurring transactions.
+
+Use voice commands for quick actions.
+
+View transaction history and monthly financial reports.
+
+Contribution
+
+Contributions are welcome! Feel free to submit a pull request or open an issue.
+
+License
+
+This project is licensed under the MIT License.
+
+Contact
+
+For any queries, reach out to hsdevelopers08@gmail.com 
