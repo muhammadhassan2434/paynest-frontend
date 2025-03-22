@@ -1,4 +1,4 @@
-Paynest Mobile Wallet Application (Pakistan)
+**Paynest Mobile Wallet Application (Pakistan)**
 
 Overview
 
@@ -26,9 +26,6 @@ Technology Stack
 
 Frontend: React Native (for cross-platform mobile development)
 
-Backend: Laravel (for API and business logic)
-
-Database: MySQL / PostgreSQL
 
 Authentication: Laravel Sanctum / Firebase Authentication
 
@@ -53,7 +50,6 @@ git clone https://github.com/muhammadhassan2434/paynest-frontend.git
 
 Install frontend dependencies:
 
-cd ../frontend
 npm install
 
 Run the React Native app:
