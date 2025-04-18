@@ -4,6 +4,7 @@ const onboardingSplashDark = require("../assets/images/onboarding_splash1_dark.p
 const idAvatar = require("../assets/images/id_avatar.png");
 const avatar = require("../assets/images/avatar.png");
 const card = require("../assets/images/card.png");
+const paylogo = require("../assets/images/paylogo.png");
 const face = require("../assets/images/face.png");
 const scanCard = require("../assets/images/scan_card.png");
 const user1 = require("../assets/images/users/user1.jpeg");
@@ -42,6 +43,7 @@ const images = {
     user11,
     elipseCard,
     rectangleCard,
+    paylogo,
 };
 
 export default images;

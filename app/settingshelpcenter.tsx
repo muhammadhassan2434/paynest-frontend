@@ -180,7 +180,7 @@ const contactUsRoute = () => {
       <HelpCenterItem
         icon={icons.headset}
         title="Customer Service"
-        onPress={() => navigation.navigate("customerservice")}
+        onPress={() => navigation.navigate("")}
       />
       <HelpCenterItem
         icon={icons.whatsapp}

@@ -47,25 +47,44 @@ export const validateEmail = (id: string, value: string): string | undefined => 
     return validationResult && validationResult[id]?.[0];
 };
 
-export const validatePassword = (id: string, value: string): string | undefined => {
-    const constraints: Constraints = {
-        [id]: {
-            presence: {
-                allowEmpty: false,
-            },
-        },
-    };
-
-    if (value !== "") {
-        constraints[id].length = {
-            minimum: 6,
-            message: "must be at least 6 characters",
-        };
+export const validatePassword = (inputId: string, inputValue: string): string | undefined => {
+    const password = inputValue.trim();
+  
+    // Laravel-style 'required' rule
+    if (!password) {
+      return `${inputId.replace(/([A-Z])/g, ' $1')} is required.`;
     }
-
-    const validationResult = validate({ [id]: value }, constraints);
-    return validationResult && validationResult[id]?.[0];
-};
+  
+    // Example Laravel-style strong password rules
+    const minLength = 8;
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasLowercase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[^A-Za-z0-9]/.test(password);
+  
+    if (password.length < minLength) {
+      return 'Password must be at least 8 characters long.';
+    }
+  
+    if (!hasUppercase) {
+      return 'Password must contain at least one uppercase letter.';
+    }
+  
+    if (!hasLowercase) {
+      return 'Password must contain at least one lowercase letter.';
+    }
+  
+    if (!hasNumber) {
+      return 'Password must contain at least one number.';
+    }
+  
+    if (!hasSpecialChar) {
+      return 'Password must contain at least one special character.';
+    }
+  
+    return undefined;
+  };
+  
 
 export const validateNumber = (id: string, value: string): string | undefined => {
     const constraints: Constraints = {

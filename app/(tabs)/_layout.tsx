@@ -79,37 +79,8 @@ const TabLayout = () => {
           },
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="scanqrcode"
-        options={{
-          title: "",
-          tabBarIcon: () => {
-            return (
-              <View style={{
-                height: 64,
-                width: 64,
-                borderRadius: 32,
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: COLORS.primary,
-                marginBottom: 16
-              }}>
-                <Image
-                  source={icons.scan2}
-                  contentFit="contain"
-                  style={{
-                    width: 24,
-                    height: 24,
-                    tintColor: COLORS.white
-                  }}
-                />
-              </View>
-            )
-          },
-        }}
-      />
-      <Tabs.Screen
-        name="mycard"
         options={{
           title: "",
           tabBarIcon: ({ focused }: { focused: boolean }) => {
@@ -130,7 +101,35 @@ const TabLayout = () => {
                 <Text style={{
                   ...FONTS.body4,
                   color: focused ? COLORS.primary : dark ? COLORS.gray3 : COLORS.gray3,
-                }}>My Card</Text>
+                }}>Reminder</Text>
+              </View>
+            )
+          },
+        }}
+      /> */}
+      <Tabs.Screen
+        name="billreminder"
+        options={{
+          title: "",
+          tabBarIcon: ({ focused }: { focused: boolean }) => {
+            return (
+              <View style={{
+                alignItems: "center",
+                paddingTop: 16
+              }}>
+                <Image
+                  source={focused ? icons.wallet2 : icons.wallet2Outline}
+                  contentFit="contain"
+                  style={{
+                    width: 24,
+                    height: 24,
+                    tintColor: focused ? COLORS.primary : dark ? COLORS.gray3 : COLORS.gray3,
+                  }}
+                />
+                <Text style={{
+                  ...FONTS.body4,
+                  color: focused ? COLORS.primary : dark ? COLORS.gray3 : COLORS.gray3,
+                }}>Bill Reminder</Text>
               </View>
             )
           },

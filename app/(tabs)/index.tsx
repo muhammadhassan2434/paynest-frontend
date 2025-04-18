@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-virtualized-view';
 import { useTheme } from '@/theme/ThemeProvider';
@@ -10,16 +10,30 @@ import { useNavigation } from 'expo-router';
 import SubHeaderItem from '@/components/SubHeaderItem';
 import { services } from '@/data';
 import Category from '@/components/Category';
+import { useAuth } from '@/utils/hooks/AuthContext';
+import useAuthMiddleware from '@/utils/hooks/useAuthMiddleware';
 
 type Nav = {
   navigate: (value: string) => void
 }
+const capitalizeFirstLetter = (str?: string) => {
+  if (!str) return '';
+  return str[0].toUpperCase() + str.slice(1);
+};
+
 
 const HomeScreen = () => {
+  useAuthMiddleware();
+  const { account, token, logout } = useAuth();
+  // console.log(account)
   const { dark, colors } = useTheme();
   const navigation = useNavigation<NavigationProp<any>>();
   const { navigate } = useNavigation<Nav>();
+  const [isBalanceVisible, setIsBalanceVisible] = useState(true); // State to toggle balance visibility
 
+  const toggleBalanceVisibility = () => {
+    setIsBalanceVisible(prevState => !prevState); // Toggle the visibility
+  };
   /**
   * Render header
   */
@@ -28,7 +42,7 @@ const HomeScreen = () => {
       <View style={styles.headerContainer}>
         <View style={styles.viewLeft}>
           <Image
-            source={images.user1}
+            source={images.paylogo}
             contentFit='contain'
             style={styles.userIcon}
           />
@@ -36,20 +50,12 @@ const HomeScreen = () => {
             <Text style={styles.greeeting}>Good Morning👋</Text>
             <Text style={[styles.title, {
               color: dark ? COLORS.white : COLORS.greyscale900
-            }]}>Andrew Ainsley</Text>
+            }]}> {capitalizeFirstLetter(account?.[0]?.user?.first_name)}</Text>
           </View>
         </View>
         <View style={styles.viewRight}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("promoanddiscount")}>
-            <Image
-              source={icons.discount3}
-              contentFit='contain'
-              style={[styles.bookmarkIcon, { tintColor: dark ? COLORS.white : COLORS.greyscale900 }]}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("notifications")}>
+            onPress={() => navigation.navigate("")}>
             <Image
               source={icons.notificationBell2}
               contentFit='contain'
@@ -68,22 +74,22 @@ const HomeScreen = () => {
       <View style={styles.cardContainer}>
         <View style={styles.topCardContainer}>
           <View>
-            <Text style={styles.username}>Andrew Ainsley</Text>
-            <Text style={styles.cardNum}>.... .... .... 3779</Text>
+            <Text style={styles.username}>{capitalizeFirstLetter(account?.[0]?.user.first_name)} {capitalizeFirstLetter(account?.[0]?.user.last_name)}</Text>
+            <Text style={styles.cardNum}>{account?.[0]?.phone}</Text>
           </View>
-          <Image
-            source={icons.mastercard}
-            contentFit='contain'
-            style={styles.cardIcon}
-          />
+          {/*  */}
         </View>
         <View style={styles.balanceContainer}>
           <Text style={styles.balanceText}>Your balance</Text>
-          <Text style={styles.balanceAmount}>$12,689</Text>
+          <TouchableOpacity onPress={toggleBalanceVisibility}>
+        <Text style={styles.balanceAmount}>
+          {isBalanceVisible ? `Rs ${account?.[0]?.balance}` : '****'}
+        </Text>
+      </TouchableOpacity>
         </View>
         <View style={styles.bottomCardContainer}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("transfertobankselectbank")}
+            onPress={() => navigation.navigate("paynesttransferid")}
             style={styles.categoryContainer}>
             <View style={styles.categoryIconContainer}>
               <Image
@@ -95,7 +101,7 @@ const HomeScreen = () => {
             <Text style={styles.categoryText}>Transfer</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("sendmoney")}
+            onPress={() => navigation.navigate("paynesttransferid")}
             style={styles.categoryContainer}>
             <View style={styles.categoryIconContainer}>
               <Image
@@ -107,7 +113,7 @@ const HomeScreen = () => {
             <Text style={styles.categoryText}>Send</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("requestmoney")}
+            onPress={() => navigation.navigate("")}
             style={styles.categoryContainer}>
             <View style={styles.categoryIconContainer}>
               <Image
@@ -119,7 +125,7 @@ const HomeScreen = () => {
             <Text style={styles.categoryText}>Request</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("inoutpaymenthistory")}
+            onPress={() => navigation.navigate("")}
             style={styles.categoryContainer}>
             <View style={styles.categoryIconContainer}>
               <Image
@@ -146,7 +152,7 @@ const HomeScreen = () => {
           onPress={() => navigate("allservices")}
         />
         <FlatList
-          data={services.slice(0, 12)}
+          data={services.slice(0, 8)}
           keyExtractor={(item, index) => index.toString()}
           horizontal={false}
           numColumns={4} // Render two items per row
@@ -274,7 +280,7 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   balanceAmount: {
-    fontSize: 48,
+    fontSize: 28,
     fontFamily: "extraBold",
     color: COLORS.white
   },

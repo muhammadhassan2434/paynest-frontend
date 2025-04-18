@@ -13,6 +13,10 @@ import OrSeparator from '../components/OrSeparator';
 import { useTheme } from '../theme/ThemeProvider';
 import { useNavigation } from 'expo-router';
 import { Image } from 'expo-image';
+import { useAuth } from '@/utils/hooks/AuthContext';
+import axios from 'axios';
+import { USER_LOGIN } from '@/utils/mutations/accountCreationMutation';
+import { useMutation } from '@tanstack/react-query';
 
 interface InputValues {
   email: string
@@ -52,6 +56,8 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [isChecked, setChecked] = useState(false);
   const { colors, dark } = useTheme();
+  const { login } = useAuth()
+  
 
   const inputChangedHandler = useCallback(
     (inputId: string, inputValue: string) => {
@@ -70,19 +76,44 @@ const Login = () => {
   }, [error]);
 
   // Implementing apple authentication
-  const appleAuthHandler = () => {
-    console.log("Apple Authentication")
-  };
+  const {
+  mutate: loginMutate,
+  isPending,
+  error: mutationError,
+  data,
+} = useMutation({
+  mutationFn: USER_LOGIN,
+  onSuccess: (response) => {
+    console.log("Login Success Response:", response);
+    const { token, user_id, account } = response;
 
-  // Implementing facebook authentication
-  const facebookAuthHandler = () => {
-    console.log("Facebook Authentication")
-  };
+    if (!token || !user_id || !account) {
+      Alert.alert("Login Failed", "Invalid login data received.");
+      return;
+    }
 
-  // Implementing google authentication
-  const googleAuthHandler = () => {
-    console.log("Google Authentication")
+    login(token, user_id, account);
+    navigate("(tabs)");
+  },
+  onError: (error: any) => {
+    const errorMessage =
+      error?.response?.data?.message || error?.message || "Something went wrong.";
+
+    Alert.alert("Login Failed", errorMessage);
+    console.log("Login Failed", error.message);
+  },
+});
+
+  const isLoading = isPending;
+  
+  const loginHandler = () => {
+    loginMutate({
+      email: formState.inputValues.email,
+      password: formState.inputValues.password,
+    });
   };
+  
+  
 
   return (
     <SafeAreaView style={[styles.area, {
@@ -95,7 +126,7 @@ const Login = () => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.logoContainer}>
             <Image
-              source={images.logo}
+              source={images.paylogo}
               contentFit='contain'
               style={styles.logo}
             />
@@ -122,51 +153,19 @@ const Login = () => {
             icon={icons.padlock}
             secureTextEntry={true}
           />
-          <View style={styles.checkBoxContainer}>
-            <View style={{ flexDirection: 'row' }}>
-              <Checkbox
-                style={styles.checkbox}
-                value={isChecked}
-                color={isChecked ? COLORS.primary : dark ? COLORS.primary : "gray"}
-                onValueChange={setChecked}
-              />
-              <View style={{ flex: 1 }}>
-                <Text style={[styles.privacy, {
-                  color: dark ? COLORS.white : COLORS.black
-                }]}>Remenber me</Text>
-              </View>
-            </View>
-          </View>
           <Button
-            title="Login"
+            title={isLoading ? "Logging in..." : "Login"}
             filled
-            onPress={() => navigate("(tabs)")}
+            onPress={loginHandler}
             style={styles.button}
+            disabled={isLoading}
           />
-          <TouchableOpacity
+          {/* forget password */}
+          {/* <TouchableOpacity
             onPress={() => navigate("forgotpasswordmethods")}>
             <Text style={styles.forgotPasswordBtnText}>Forgot the password?</Text>
-          </TouchableOpacity>
-          <View>
-            <OrSeparator text="or continue with" />
-            <View style={styles.socialBtnContainer}>
-              <SocialButton
-                icon={icons.appleLogo}
-                onPress={appleAuthHandler}
-                tintColor={dark ? COLORS.white : COLORS.black}
-              />
-              <SocialButton
-                icon={icons.facebook}
-                onPress={facebookAuthHandler}
-              />
-              <SocialButton
-                icon={icons.google}
-                onPress={googleAuthHandler}
-              />
-            </View>
-          </View>
-        </ScrollView>
-        <View style={styles.bottomContainer}>
+            </TouchableOpacity> */}
+            <View style={styles.bottomContainer}>
           <Text style={[styles.bottomLeft, {
             color: dark ? COLORS.white : COLORS.black
           }]}>Don't have an account ?</Text>
@@ -174,7 +173,10 @@ const Login = () => {
             onPress={() => navigate("signup")}>
             <Text style={styles.bottomRight}>{"  "}Sign Up</Text>
           </TouchableOpacity>
-        </View>
+              </View>
+          
+        </ScrollView>
+          
       </View>
     </SafeAreaView>
   )
@@ -191,9 +193,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white
   },
   logo: {
-    width: 100,
-    height: 100,
-    tintColor: COLORS.primary
+    width: 120,
+    height: 120,
   },
   logoContainer: {
     alignItems: "center",
@@ -212,20 +213,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  checkBoxContainer: {
-    flexDirection: "row",
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginVertical: 18,
-  },
-  checkbox: {
-    marginRight: 8,
-    height: 16,
-    width: 16,
-    borderRadius: 4,
-    borderColor: COLORS.primary,
-    borderWidth: 2,
-  },
+ 
   privacy: {
     fontSize: 12,
     fontFamily: "regular",
@@ -244,14 +232,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   bottomContainer: {
+marginTop:20,
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "center",
-    marginVertical: 18,
-    position: "absolute",
-    bottom: 12,
-    right: 0,
-    left: 0,
   },
   bottomLeft: {
     fontSize: 14,

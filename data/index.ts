@@ -514,31 +514,31 @@ export const bankData = [
 export const services = [
     {
         id: "1",
-        name: "Electricity",
+        name: "paynest Transfer",
         icon: icons.electricity,
         iconColor: "#FFD300",
         backgroundColor: "rgba(255, 211, 0, .12)",
-        onPress: "paybillselectricitycustomerid"
+        onPress: "paynesttransferid"
     },
     {
         id: "2",
-        name: "Internet",
+        name: "Bank",
         icon: icons.internet2,
         iconColor: "#FF981F",
         backgroundColor: "rgba(255, 152, 31, .12)",
-        onPress: "paybillsinternetcustomerid"
+        onPress: ""
     },
     {
         id: "3",
-        name: "Water",
+        name: "Bill reminder",
         icon: icons.water,
         iconColor: "#1A96F0",
         backgroundColor: "rgba(26, 150, 240, .12)",
-        onPress: "paybillswatercustomerid"
+        onPress: "billreminderlistscreen"
     },
     {
         id: "4",
-        name: "E-Wallet",
+        name: "Shedule Payment",
         icon: icons.wallet2,
         iconColor: "#673AB3",
         backgroundColor: "rgba(103, 58, 179, .12)",
@@ -546,7 +546,7 @@ export const services = [
     },
     {
         id: "5",
-        name: "Games",
+        name: "Split Bill",
         icon: icons.games,
         iconColor: "#F54336",
         backgroundColor: "rgba(245, 67, 54, .12)",
@@ -554,7 +554,7 @@ export const services = [
     },
     {
         id: "6",
-        name: "Television",
+        name: "Balance",
         icon: icons.television,
         iconColor: "#3F51B2",
         backgroundColor: "rgba(63, 81, 178, .12)",
@@ -562,7 +562,7 @@ export const services = [
     },
     {
         id: "7",
-        name: "Merchant",
+        name: "Report",
         icon: icons.cart,
         iconColor: "#9D28AC",
         backgroundColor: "rgba(157, 40, 172, .12)",
@@ -570,7 +570,7 @@ export const services = [
     },
     {
         id: "8",
-        name: "Installment",
+        name: "Bill Payment",
         icon: icons.installment,
         iconColor: "#FF5726",
         backgroundColor: "rgba(255, 87, 38, .12)",
