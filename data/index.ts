@@ -526,7 +526,7 @@ export const services = [
         icon: icons.internet2,
         iconColor: "#FF981F",
         backgroundColor: "rgba(255, 152, 31, .12)",
-        onPress: ""
+        onPress: "addnewaddress"
     },
     {
         id: "3",

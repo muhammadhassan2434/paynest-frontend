@@ -1,5 +1,6 @@
 // context/AuthContext.tsx
 import React, { createContext, useContext, useState } from 'react';
+import axios from 'axios';
 
 interface User {
   id: number;
@@ -35,6 +36,7 @@ interface AuthContextType {
   account: Account[] | null;
   login: (token: string, userId: number, account: Account[]) => void;
   logout: () => void;
+  getUserInfo: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -43,6 +45,7 @@ const AuthContext = createContext<AuthContextType>({
   account: null,
   login: () => {},
   logout: () => {},
+  getUserInfo: () => {},
 });
 
 export const useAuth = () => useContext(AuthContext);
@@ -64,8 +67,29 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setAccount(null);
   };
 
+  const getUserInfo = async () => {
+    if (!token || !account || account.length === 0) return;
+
+    try {
+      const response = await axios.get(
+        `https://paynest.coinxness.com/api/account/info/${account[0].id}`, // replace with actual base URL
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.status === true) {
+        setAccount([response.data.user]); // since backend returns single account
+      }
+    } catch (error) {
+      console.error("Failed to fetch user info", error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ token, userId, account, login, logout }}>
+    <AuthContext.Provider value={{ token, userId, account, login, logout, getUserInfo }}>
       {children}
     </AuthContext.Provider>
   );

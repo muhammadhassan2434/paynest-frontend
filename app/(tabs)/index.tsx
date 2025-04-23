@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-virtualized-view';
 import { useTheme } from '@/theme/ThemeProvider';
 import { COLORS, SIZES, icons, images } from '@/constants';
 import { Image } from 'expo-image';
 import { NavigationProp } from '@react-navigation/native';
-import { useNavigation } from 'expo-router';
+import { useFocusEffect, useNavigation } from 'expo-router';
 import SubHeaderItem from '@/components/SubHeaderItem';
 import { services } from '@/data';
 import Category from '@/components/Category';
@@ -24,12 +24,24 @@ const capitalizeFirstLetter = (str?: string) => {
 
 const HomeScreen = () => {
   useAuthMiddleware();
-  const { account, token, logout } = useAuth();
+  const { account, token, logout, getUserInfo } = useAuth();
   // console.log(account)
   const { dark, colors } = useTheme();
   const navigation = useNavigation<NavigationProp<any>>();
   const { navigate } = useNavigation<Nav>();
   const [isBalanceVisible, setIsBalanceVisible] = useState(true); // State to toggle balance visibility
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchUserInfo = async () => {
+        if (token && account && account.length > 0) { // Ensure token and account are available
+          await getUserInfo(); // Refresh user data when screen is focused
+        }
+      };
+    
+      fetchUserInfo();
+    }, [token, account?.[0]?.id]) // Trigger when token or account changes
+  );
 
   const toggleBalanceVisibility = () => {
     setIsBalanceVisible(prevState => !prevState); // Toggle the visibility
