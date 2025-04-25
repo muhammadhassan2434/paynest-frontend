@@ -6,13 +6,11 @@ import { Image } from 'expo-image';
 
 interface CategoryProps {
     name: string;
-    icon: string;
-    iconColor: string;
-    backgroundColor: string;
+    icon: any;
     onPress: () => void;
 }
 
-const Category: React.FC<CategoryProps> = ({ name, icon, iconColor, backgroundColor, onPress }) => {
+const Category: React.FC<CategoryProps> = ({ name, icon , onPress }) => {
     const { dark } = useTheme();
 
     const displayName = name.length > 9 ? `${name.slice(0, 9)}...` : name;
@@ -21,15 +19,11 @@ const Category: React.FC<CategoryProps> = ({ name, icon, iconColor, backgroundCo
         <View style={styles.container}>
             <TouchableOpacity
                 onPress={onPress}
-                style={[styles.iconContainer, {
-                    backgroundColor: backgroundColor
-                }]}>
+                style={[styles.iconContainer]}>
                 <Image
                     source={icon}
                     contentFit='contain'
-                    style={[styles.icon, {
-                        tintColor: iconColor
-                    }]}
+                    style={[styles.icon]}
                 />
             </TouchableOpacity>
             <Text style={[styles.name, {
@@ -55,8 +49,8 @@ const styles = StyleSheet.create({
         marginBottom: 8,
     },
     icon: {
-        height: 24,
-        width: 24,
+        height: 50,
+        width: 50,
     },
     name: {
         fontSize: 14,

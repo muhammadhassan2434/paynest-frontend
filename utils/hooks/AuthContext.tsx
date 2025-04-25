@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const getUserInfo = async () => {
     if (!token || !account || account.length === 0) return;
-
+  
     try {
       const response = await axios.get(
         `https://paynest.coinxness.com/api/account/info/${account[0].id}`, // replace with actual base URL
@@ -79,14 +79,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           },
         }
       );
-
+  
       if (response.data.status === true) {
-        setAccount([response.data.user]); // since backend returns single account
+        // Update only the account state
+        setAccount([response.data.user]);
       }
     } catch (error) {
       console.error("Failed to fetch user info", error);
     }
   };
+  
 
   return (
     <AuthContext.Provider value={{ token, userId, account, login, logout, getUserInfo }}>

@@ -8,10 +8,11 @@ import { Image } from 'expo-image';
 import { NavigationProp } from '@react-navigation/native';
 import { useFocusEffect, useNavigation } from 'expo-router';
 import SubHeaderItem from '@/components/SubHeaderItem';
-import { services } from '@/data';
 import Category from '@/components/Category';
 import { useAuth } from '@/utils/hooks/AuthContext';
 import useAuthMiddleware from '@/utils/hooks/useAuthMiddleware';
+import { FETCH_SERVICES } from "@/utils/mutations/servicesmutation"; 
+import useFetchServices from '@/hooks/services';
 
 type Nav = {
   navigate: (value: string) => void
@@ -20,6 +21,8 @@ const capitalizeFirstLetter = (str?: string) => {
   if (!str) return '';
   return str[0].toUpperCase() + str.slice(1);
 };
+
+
 
 
 const HomeScreen = () => {
@@ -31,21 +34,40 @@ const HomeScreen = () => {
   const { navigate } = useNavigation<Nav>();
   const [isBalanceVisible, setIsBalanceVisible] = useState(true); // State to toggle balance visibility
 
+  
+  const {
+    data: services = [],
+    isLoading: servicesLoading,
+    isError: servicesError,
+  } = useFetchServices(["fetch_services"], FETCH_SERVICES);
+
+  
+
   useFocusEffect(
     useCallback(() => {
       const fetchUserInfo = async () => {
-        if (token && account && account.length > 0) { // Ensure token and account are available
-          await getUserInfo(); // Refresh user data when screen is focused
+        if (token && account && account.length > 0) {
+          await getUserInfo(); // Updates only account state
         }
       };
     
       fetchUserInfo();
-    }, [token, account?.[0]?.id]) // Trigger when token or account changes
+    }, [token, account?.[0]?.id]) 
   );
+  
 
   const toggleBalanceVisibility = () => {
     setIsBalanceVisible(prevState => !prevState); // Toggle the visibility
   };
+
+  const serviceScreenMapping: Record<string, string> = {
+    "Money Transfer": "paynesttransferid",
+    "Service 2": "ServiceTwoScreen",
+    "Service 3": "ServiceThreeScreen",
+    // ...
+  };
+  
+  
   /**
   * Render header
   */
@@ -163,26 +185,30 @@ const HomeScreen = () => {
           navTitle="See all"
           onPress={() => navigate("allservices")}
         />
-        <FlatList
-          data={services.slice(0, 8)}
-          keyExtractor={(item, index) => index.toString()}
-          horizontal={false}
-          numColumns={4} // Render two items per row
-          style={{ marginTop: 0 }}
-          renderItem={({ item, index }) => (
-            <Category
-              name={item.name}
-              icon={item.icon}
-              iconColor={item.iconColor}
-              backgroundColor={item.backgroundColor}
-              onPress={() => {
-                if (item.onPress !== "") {
-                  navigation.navigate(item.onPress);
-                }
-              }}
-            />
-          )}
-        />
+       <FlatList
+        data={services.slice(0, 8)}
+        keyExtractor={(item) => item.id.toString()}
+        numColumns={4}
+        renderItem={({ item }) => (
+          <Category
+            name={item.name}
+            icon={{ uri: `https://paynest.coinxness.com/${item.logo}` }} 
+            onPress={() => {
+              const screenName = serviceScreenMapping[item.name];
+      
+              if (screenName) {
+                navigation.navigate(screenName, {
+                  serviceId: item.id, 
+                  serviceName: item.name
+                });
+              } else {
+                console.warn('No screen found for this service.');
+              }
+            }}
+          />
+        )}
+      />
+
       </View>
     )
   }

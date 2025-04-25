@@ -12,7 +12,13 @@ export const API_ENDPOINTS = {
         VALIDATENUMBER: API_DOMAIN + 'validate/paynest/number',
         VALIDATEAMOUNT: API_DOMAIN + 'validate/enteramount',
         TRANSFERAMOUNT: API_DOMAIN + 'paynest/transfer',
-    }
+    },
+    SERVICES: {
+        FETCHSERVICES: API_DOMAIN + 'services',
+    },
+    
+
+
 
 
 }
