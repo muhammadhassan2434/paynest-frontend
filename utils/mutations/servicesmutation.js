@@ -4,11 +4,12 @@ import { apiCall } from "../cutomApiCall";
 
 
 
-export const FETCH_SERVICES = async () => {
-  const result = await apiCall(API_ENDPOINTS.SERVICES.FETCHSERVICES, "GET");
-  console.log("FETCH_SERVICES result:", result);
+export const FETCH_SERVICES = async (token) => {
+  const result = await apiCall(API_ENDPOINTS.SERVICES.FETCHSERVICES, "GET", null, token);
+  // console.log("FETCH_SERVICES result:", result);
   return result;
 };
+
 
 
 

@@ -15,12 +15,22 @@ import Toast from "react-native-toast-message";
 import { useMutation } from "@tanstack/react-query";
 
 type Nav = {
-  navigate: (value: string) => void;
-};
+  navigate: (
+    value: string,
+    params?: {
+      amount?: number;
+      reciever_number?: string;
+      reciever_paynestid?: string;
+      reciever_name?: string;
+      reciever_email?: string;
+    }
+  ) => void;
+}
+
 
 const PaynestTransferAmountForm = () => {
   const { reciever_number } = useLocalSearchParams();
-  const { account, token, logout } = useAuth();
+  const { account, token } = useAuth();
   const refRBSheet = useRef<any>(null);
   const { navigate } = useNavigation<Nav>();
   const { colors, dark } = useTheme();
@@ -31,7 +41,7 @@ const PaynestTransferAmountForm = () => {
       amount: string;
       reciever_number: string;
       account_id: string;
-    }) => VALIDATE_PAYNEST_AMOUNT(payload),
+    }) => VALIDATE_PAYNEST_AMOUNT(payload, token),
     onSuccess: (data) => {
         if (data?.status) {
           navigate("paynesttransfersummary", {

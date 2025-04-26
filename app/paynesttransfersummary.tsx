@@ -16,9 +16,17 @@ type Nav = {
   navigate: (value: string) => void
 }
 
+type TransferPayload = {
+  amount: string;
+  reciever_number: string;
+  reciever_paynestid: string;
+  reciever_name: string;
+  reciever_email: string;
+};
+
 const paynestTransferSummary = () => {
   const { colors, dark } = useTheme();
-    const { account,getUser , token, logout } = useAuth();
+    const { account , token } = useAuth();
   const {
     amount,
     reciever_number,
@@ -29,7 +37,7 @@ const paynestTransferSummary = () => {
   
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: TRANSFER_AMOUNT,
+    mutationFn: (data: TransferPayload) => TRANSFER_AMOUNT(data, token), // 👈 token is used from closure here
     onSuccess: (data) => {
       if (data?.status) {
         router.push({
@@ -44,12 +52,15 @@ const paynestTransferSummary = () => {
         });
       } else {
         alert(data.message || "Transfer failed");
+        console.log(data.message);
       }
     },
     onError: (error) => {
       alert("Something went wrong: " + error.message);
-    }
+    },
   });
+  
+  
   
   
 
@@ -146,9 +157,12 @@ const paynestTransferSummary = () => {
     mutate({
       amount,
       reciever_number,
-      account_id: account?.[0]?.id,
-      sender_id: account?.[0]?.user_id,
+      reciever_paynestid,
+      reciever_name,
+      reciever_email,
     });
+    
+    
   }}
   filled
 />

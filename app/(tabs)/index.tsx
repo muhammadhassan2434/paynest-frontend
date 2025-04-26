@@ -28,21 +28,21 @@ const capitalizeFirstLetter = (str?: string) => {
 const HomeScreen = () => {
   useAuthMiddleware();
   const { account, token, logout, getUserInfo } = useAuth();
-  // console.log(account)
   const { dark, colors } = useTheme();
   const navigation = useNavigation<NavigationProp<any>>();
   const { navigate } = useNavigation<Nav>();
-  const [isBalanceVisible, setIsBalanceVisible] = useState(true); // State to toggle balance visibility
-
-  
+  const [isBalanceVisible, setIsBalanceVisible] = useState(true);   
   const {
     data: services = [],
     isLoading: servicesLoading,
     isError: servicesError,
-  } = useFetchServices(["fetch_services"], FETCH_SERVICES);
-
-  
-
+    refetch, 
+  } = useFetchServices(["fetch_services"], () => FETCH_SERVICES(token));
+  useFocusEffect(
+      useCallback(() => {
+        refetch(); 
+      }, [refetch])
+    );
   useFocusEffect(
     useCallback(() => {
       const fetchUserInfo = async () => {
@@ -57,12 +57,12 @@ const HomeScreen = () => {
   
 
   const toggleBalanceVisibility = () => {
-    setIsBalanceVisible(prevState => !prevState); // Toggle the visibility
+    setIsBalanceVisible(prevState => !prevState); 
   };
 
   const serviceScreenMapping: Record<string, string> = {
     "Money Transfer": "paynesttransferid",
-    "Service 2": "ServiceTwoScreen",
+    "Bill Reminder": "billreminderlistscreen",
     "Service 3": "ServiceThreeScreen",
     // ...
   };

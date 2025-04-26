@@ -17,8 +17,6 @@ const PaynestTransferSuccess = () => {
   const {
     reference,
     amount,
-    reciever_name,
-    reciever_lastname,
     reciever_number,
   } = useLocalSearchParams();
 
@@ -44,11 +42,6 @@ const PaynestTransferSuccess = () => {
         }]}>
           You are transferring money to:
         </Text>
-
-        <Text style={[styles.detailText, { color: dark ? COLORS.white : COLORS.greyscale900 }]}>
-          Name: {reciever_name} {reciever_lastname}
-        </Text>
-
         <Text style={[styles.detailText, { color: dark ? COLORS.white : COLORS.greyscale900 }]}>
           Account Number: {reciever_number}
         </Text>

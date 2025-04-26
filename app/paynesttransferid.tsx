@@ -10,6 +10,7 @@ import { useNavigation } from 'expo-router';
 import { useMutation } from '@tanstack/react-query';
 import { VALIDATE_PAYNEST_NUMBER } from '../utils/mutations/paynesttransfer';
 import Toast from 'react-native-toast-message';
+import { useAuth } from '@/utils/hooks/AuthContext';
 
 
 type Nav = {
@@ -18,11 +19,12 @@ type Nav = {
 
 const PaynestTransferId = () => {
   const { colors, dark } = useTheme();
+  const { token } = useAuth();
   const { navigate } = useNavigation<Nav>();
   const [value, setValue] = useState<string>('');
 
   const validateMutation = useMutation({
-    mutationFn: (data: { reciever_number: string }) => VALIDATE_PAYNEST_NUMBER(data),
+    mutationFn: (data: { reciever_number: string }) => VALIDATE_PAYNEST_NUMBER(data,token),
     onSuccess: (data) => {
       if (data?.status) {
         navigate("paynesttransferamountform", {

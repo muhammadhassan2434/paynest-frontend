@@ -32,9 +32,9 @@ export default function RootLayout() {
         const alreadyLaunched = await AsyncStorage.getItem('alreadyLaunched');
         if (alreadyLaunched === null) {
           await AsyncStorage.setItem('alreadyLaunched', 'true');
-          setInitialRoute('index'); // First-time user goes to index
+          setInitialRoute('index'); 
         } else {
-          setInitialRoute('login'); // Returning user goes to login
+          setInitialRoute('login'); 
         }
       } catch (error) {
         console.error('Error checking first launch:', error);
@@ -86,8 +86,10 @@ export default function RootLayout() {
         <Stack.Screen name="paynesttransferamountform" />
         <Stack.Screen name="paynesttransfersummary" />
         <Stack.Screen name="paynesttransfersuccess" />
+
+        {/* bill reminder routes */}
         <Stack.Screen name="billreminderlistscreen" />
-        <Stack.Screen name="managereminders" />
+        <Stack.Screen name="addbillreminder" />
 
 
 

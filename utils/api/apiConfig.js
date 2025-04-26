@@ -16,6 +16,11 @@ export const API_ENDPOINTS = {
     SERVICES: {
         FETCHSERVICES: API_DOMAIN + 'services',
     },
+    BILLREMINDER: {
+        FETCHFILLREMINDER: API_DOMAIN + 'billreminders',
+        STOREBILLREMINDER: API_DOMAIN + 'store/billreminder',
+        DELETEBILLREMINDER: API_DOMAIN + 'delete/billreminder',
+    },
     
 
 
