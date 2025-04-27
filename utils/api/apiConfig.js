@@ -18,8 +18,10 @@ export const API_ENDPOINTS = {
     },
     BILLREMINDER: {
         FETCHFILLREMINDER: API_DOMAIN + 'billreminders',
+        FETCHPENDINGREMINDERS: API_DOMAIN + 'pending/billreminders',
+        FETCHSUCCESSREMINDERS: API_DOMAIN + 'success/billreminders',
         STOREBILLREMINDER: API_DOMAIN + 'store/billreminder',
-        DELETEBILLREMINDER: API_DOMAIN + 'delete/billreminder',
+        DELETEBILLREMINDER: API_DOMAIN + 'delete/billreminder/{id}',
     },
     
 

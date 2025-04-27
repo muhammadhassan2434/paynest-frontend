@@ -72,44 +72,30 @@ export default function RootLayout() {
         <Stack.Screen name="otpverification" />
         <Stack.Screen name="verifymobileotp" />
         <Stack.Screen name="createnewpin" />
-        {/* <Stack.Screen name="reasonforusingallpay" /> */}
-        {/* <Stack.Screen name="verifyyouridentity" /> */}
-        {/* <Stack.Screen name="proofofresidency" /> */}
-        {/* <Stack.Screen name="photoidcard" /> */}
-        {/* <Stack.Screen name="selfiewithidcard" /> */}
-        {/* <Stack.Screen name="facerecognitionwalkthrough" /> */}
-        {/* <Stack.Screen name="facerecognitionscan" /> */}
-        {/* <Stack.Screen name="scanqrcode" /> */}
         <Stack.Screen name="fillyourprofile" />
         {/* paynest transfer routes  */}
         <Stack.Screen name="paynesttransferid" />
         <Stack.Screen name="paynesttransferamountform" />
         <Stack.Screen name="paynesttransfersummary" />
         <Stack.Screen name="paynesttransfersuccess" />
-
+        {/* end */}
         {/* bill reminder routes */}
         <Stack.Screen name="billreminderlistscreen" />
         <Stack.Screen name="addbillreminder" />
-
-
-
+        <Stack.Screen name="billreminderdetail" />
+        {/* end */}
         <Stack.Screen name="notifications" />
-        <Stack.Screen name="address" />
-        <Stack.Screen name="addnewaddress" />
         <Stack.Screen name="editprofile" />
         <Stack.Screen name="settingshelpcenter" />
         <Stack.Screen name="settingssecurity" />
         <Stack.Screen name="settingslanguage" />
         <Stack.Screen name="settingsnotifications" />
-        <Stack.Screen name="addnewcard" />
         <Stack.Screen name="changeemail" />
         <Stack.Screen name="changepassword" />
-        <Stack.Screen name="changepin" />
         <Stack.Screen name="settingsprivacypolicy" />
         <Stack.Screen name="settingsinvitefriends" />
         <Stack.Screen name="customerservice" />
         <Stack.Screen name="allservices" />
-        <Stack.Screen name="promoanddiscount" />
         <Stack.Screen name="paybillselectricitycustomerid" />
         <Stack.Screen name="paybillselectricityreviewsummary" />
         <Stack.Screen name="paybillsinternetcustomerid" />
@@ -120,10 +106,6 @@ export default function RootLayout() {
         <Stack.Screen name="requestmoney" />
         <Stack.Screen name="requestmoneyamount" />
         <Stack.Screen name="requestmoneysuccessful" />
-        <Stack.Screen name="transfertobankamountform" />
-        <Stack.Screen name="transfertobankselectbank" />
-        <Stack.Screen name="transfertobankreviewsummary" />
-        <Stack.Screen name="transfertobanksuccessful" />
         <Stack.Screen name="sendmoney" />
         <Stack.Screen name="sendmoneytypeamount" />
         <Stack.Screen name="sendmoneychoosepaymenttype" />
@@ -135,9 +117,6 @@ export default function RootLayout() {
         <Stack.Screen name="statisticsversion3" />
         <Stack.Screen name="statisticsversion4" />
         <Stack.Screen name="userallpay" />
-        <Stack.Screen name="ecarddetails" />
-        <Stack.Screen name="ecardrefund" />
-        <Stack.Screen name="ecardtopup" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="+not-found" />
       </Stack>
