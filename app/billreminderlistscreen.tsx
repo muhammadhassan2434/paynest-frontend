@@ -104,7 +104,7 @@ const BillReminder = () => {
       <View style={styles.buttonGroup}>
         <TouchableOpacity
           style={[styles.actionButton, { backgroundColor: COLORS.primary }]}
-          onPress={() => navigation.navigate('ManageReminders', { reminderToEdit: item })}
+          onPress={() => navigation.navigate('editbillreminder', { reminderToEdit: item })}
         >
           <Text style={styles.actionButtonText}>Edit</Text>
         </TouchableOpacity>

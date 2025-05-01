@@ -21,6 +21,7 @@ export const API_ENDPOINTS = {
         FETCHPENDINGREMINDERS: API_DOMAIN + 'pending/billreminders',
         FETCHSUCCESSREMINDERS: API_DOMAIN + 'success/billreminders',
         STOREBILLREMINDER: API_DOMAIN + 'store/billreminder',
+        UPDATEBILLREMINDER: API_DOMAIN + 'update/billreminder/{id}',
         DELETEBILLREMINDER: API_DOMAIN + 'delete/billreminder/{id}',
     },
     

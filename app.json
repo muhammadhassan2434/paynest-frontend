@@ -1,16 +1,15 @@
 {
   "expo": {
-    "name": "AllPay",
-    "slug": "AllPay",
+    "name": "Paynest",
+    "slug": "Paynest",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/splash.jpg",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#246BFD"
+      "image": "./assets/images/splash.jpg",
+      "resizeMode": "contain"
     },
     "ios": {
       "supportsTablet": true
@@ -19,7 +18,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#246BFD"
-      }
+      },
+      "package": "com.hassan2434.AllPay"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +31,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2efc11f5-51b3-4d24-a2ad-97a38d51a2a3"
+      }
     }
   }
 }

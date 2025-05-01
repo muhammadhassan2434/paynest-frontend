@@ -35,7 +35,7 @@ const Profile = () => {
       <TouchableOpacity style={styles.headerContainer}>
         <View style={styles.headerLeft}>
           <Image
-            source={images.paylogo}
+            source={images.paylogo1}
             contentFit="contain"
             style={styles.logo}
           />

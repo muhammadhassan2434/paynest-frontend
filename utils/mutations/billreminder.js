@@ -19,15 +19,22 @@ export const STORE_BILL_REMINDER = async (data, token) => {
   return await apiCall(API_ENDPOINTS.BILLREMINDER.STOREBILLREMINDER, "POST", data, token);
 };
 
-export const DELETE_BILL_REMINDER = async (id, token) => {
-  // console.log('Deleting reminder with id: ', id); // Debugging the id being passed
-  // console.log('Token:', token); // Debugging the token
+export const UPDATE_BILL_REMINDER = async (id,data, token) => {
 
   return await apiCall(
-    API_ENDPOINTS.BILLREMINDER.DELETEBILLREMINDER.replace("{id}", id), // Update the endpoint with the correct URL
-    "GET",  // Using GET for deletion
+    API_ENDPOINTS.BILLREMINDER.UPDATEBILLREMINDER.replace("{id}", id), 
+    "PUT",  
+    data,
+    token 
+  );
+};
+export const DELETE_BILL_REMINDER = async (id, token) => {
+
+  return await apiCall(
+    API_ENDPOINTS.BILLREMINDER.DELETEBILLREMINDER.replace("{id}", id), 
+    "GET",  
     null,
-    token // Pass the token here
+    token 
   );
 };
 

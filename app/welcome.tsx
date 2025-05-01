@@ -19,13 +19,13 @@ const Welcome = () => {
   return (
     <SafeAreaView style={[styles.area, { backgroundColor: colors.background }]}>
       <View style={[styles.container, { backgroundColor: colors.background }]}>
-        <Image source={images.logo} contentFit="contain" style={styles.logo} />
+        <Image source={images.paylogo1} contentFit="contain" style={styles.logo} />
         <Text style={[styles.title, { color: colors.text }]}>Welcome To Paynest!</Text>
         <Text style={[styles.subtitle, { color: dark ? COLORS.white : "black" }]}>
           Hello there, personalize your financial journey for maximum returns and peace of mind on paynest.
         </Text>
         <View style={{ marginVertical: 32 }}>
-          <SocialButtonV2 title="Create a account on Paynest" icon={icons.appleLogo} onPress={() => navigate("signup")}
+          <SocialButtonV2 title="Create a account on Paynest" icon={images.paylogo1} onPress={() => navigate("signup")}
             iconStyles={{ tintColor: dark ? COLORS.white : COLORS.black }} />
         </View>
         <View style={{ flexDirection: "row" }}>
@@ -66,11 +66,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    width: 72,
-    height: 72,
+    width: 100,
+    height: 100,
     marginBottom: 22,
     marginTop: -22,
-    tintColor: COLORS.primary
   },
   title: {
     fontSize: 28,

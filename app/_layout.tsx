@@ -83,6 +83,7 @@ export default function RootLayout() {
         <Stack.Screen name="billreminderlistscreen" />
         <Stack.Screen name="addbillreminder" />
         <Stack.Screen name="billreminderdetail" />
+        <Stack.Screen name="editbillreminder" />
         {/* end */}
         <Stack.Screen name="notifications" />
         <Stack.Screen name="editprofile" />
