@@ -41,16 +41,18 @@ const styles = StyleSheet.create({
         width: (SIZES.width - 32) / 4,
     },
     iconContainer: {
-        width: 54,
-        height: 54,
+        width: 60,
+        height: 60,
         borderRadius: 999,
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 8,
+        // backgroundColor:'#246BFD'
     },
     icon: {
-        height: 50,
-        width: 50,
+        height: 35,
+        width: 40,
+        color: ''
     },
     name: {
         fontSize: 14,

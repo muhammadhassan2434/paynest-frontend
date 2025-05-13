@@ -122,7 +122,7 @@ const Login = () => {
       <View style={[styles.container, {
         backgroundColor: colors.background
       }]}>
-        <Header title="" />
+        {/* <Header title="welcome" /> */}
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.logoContainer}>
             <Image

@@ -25,7 +25,7 @@ import Toast from 'react-native-toast-message';
 const AddBillReminder = () => {
   const { colors, dark } = useTheme();
   const navigation = useNavigation();
-  const { token } = useAuth();
+  const {userId, token } = useAuth();
 
   const [billType, setBillType] = useState<string>('');
   const [amount, setAmount] = useState<string>('');
@@ -47,6 +47,7 @@ const AddBillReminder = () => {
 
 
     mutationFn: (data: {
+      user_id: number;
       bill_type: string;
       amount: string;
       due_date: string;
@@ -76,7 +77,7 @@ const AddBillReminder = () => {
       Toast.show({
         type: 'error',
         text1: 'Error',
-        text2: 'Network error',
+        text2: 'Validation Error ! Please fill all inputs',
       });
     },
   });
@@ -86,6 +87,7 @@ const AddBillReminder = () => {
     setErrors({});
 
     const data = {
+      user_id: userId,
       bill_type: billType,
       amount: amount,
       due_date: startedDate,

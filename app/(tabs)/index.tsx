@@ -63,7 +63,9 @@ const HomeScreen = () => {
   const serviceScreenMapping: Record<string, string> = {
     "Money Transfer": "paynesttransferid",
     "Bill Reminder": "billreminderlistscreen",
-    "Service 3": "ServiceThreeScreen",
+    "Schedule Payment": "schedulepaymentlistscreen",
+    "Electricity bill": "electricitybilllist",
+    "Gas bill": "gasbilllist",
     // ...
   };
   

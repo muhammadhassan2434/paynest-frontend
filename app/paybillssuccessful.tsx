@@ -39,14 +39,6 @@ const PayBillsSuccessful = () => {
                     filled
                     onPress={() => navigate("(tabs)")}
                 />
-                <Button
-                    title="Pay Another Bills"
-                    style={[styles.requestBtn, {
-                        backgroundColor: dark ? COLORS.dark3 : COLORS.transparentPrimary
-                    }]}
-                    onPress={() => navigate("allservices")}
-                    textColor={dark ? COLORS.white : COLORS.primary}
-                />
             </View>
         </View>
     )

@@ -3,16 +3,16 @@ import { apiCall } from "../cutomApiCall";
 
 
 
-export const FETCH_BILL_REMINDER = async (token) => {
-    const result = await apiCall(API_ENDPOINTS.BILLREMINDER.FETCHFILLREMINDER, "GET", null, token);
+export const FETCH_BILL_REMINDER = async (id,token) => {
+    const result = await apiCall(API_ENDPOINTS.BILLREMINDER.FETCHFILLREMINDER.replace("{id}", id), "GET", null, token);
     return result;
   };
-export const FETCH_PENDING_BILL_REMINDER = async (token) => {
-    const result = await apiCall(API_ENDPOINTS.BILLREMINDER.FETCHPENDINGREMINDERS, "GET", null, token);
+export const FETCH_PENDING_BILL_REMINDER = async (id,token) => {
+    const result = await apiCall(API_ENDPOINTS.BILLREMINDER.FETCHPENDINGREMINDERS.replace("{id}", id), "GET", null, token);
     return result;
   };
-export const FETCH_SUCCESS_BILL_REMINDER = async (token) => {
-    const result = await apiCall(API_ENDPOINTS.BILLREMINDER.FETCHSUCCESSREMINDERS, "GET", null, token);
+export const FETCH_SUCCESS_BILL_REMINDER = async (id,token) => {
+    const result = await apiCall(API_ENDPOINTS.BILLREMINDER.FETCHSUCCESSREMINDERS.replace("{id}", id), "GET", null, token);
     return result;
   };
 export const STORE_BILL_REMINDER = async (data, token) => {

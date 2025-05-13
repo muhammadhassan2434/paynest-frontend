@@ -17,13 +17,19 @@ export const API_ENDPOINTS = {
         FETCHSERVICES: API_DOMAIN + 'services',
     },
     BILLREMINDER: {
-        FETCHFILLREMINDER: API_DOMAIN + 'billreminders',
-        FETCHPENDINGREMINDERS: API_DOMAIN + 'pending/billreminders',
-        FETCHSUCCESSREMINDERS: API_DOMAIN + 'success/billreminders',
+        FETCHFILLREMINDER: API_DOMAIN + 'billreminders/{id}',
+        FETCHPENDINGREMINDERS: API_DOMAIN + 'pending/billreminders/{id}',
+        FETCHSUCCESSREMINDERS: API_DOMAIN + 'success/billreminders/{id}',
         STOREBILLREMINDER: API_DOMAIN + 'store/billreminder',
         UPDATEBILLREMINDER: API_DOMAIN + 'update/billreminder/{id}',
         DELETEBILLREMINDER: API_DOMAIN + 'delete/billreminder/{id}',
     },
+    BILLPAYMENT:{
+        FETCHELECTRICITYPROVIDER: API_DOMAIN + 'service/provider/electricity/bill',
+        FETCHELGASPROVIDER: API_DOMAIN + 'service/provider/gas/bill',
+        VALIDATECONSUMERNUMBER: API_DOMAIN + 'validate/consumer/number',
+        STOREBILLPAYMENT: API_DOMAIN + 'billpayment/store',
+    }
     
 
 

@@ -1,84 +1,120 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import PageContainer from '../components/PageContainer';
-import DotsView from '../components/DotsView';
-import Button from '../components/Button';
-import Onboarding1Styles from '../styles/OnboardingStyles';
-import { COLORS, illustrations } from '../constants';
-import { useTheme } from '../theme/ThemeProvider';
-import { useNavigation } from 'expo-router';
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { COLORS, SIZES, icons, images } from "../constants";
+import SocialButtonV2 from "../components/SocialButtonV2";
+import { useTheme } from "../theme/ThemeProvider";
+import { useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
 type Nav = {
   navigate: (value: string) => void
 }
 
-const Onboarding1 = () => {
-  const [progress, setProgress] = useState(0);
+// Welcome screen
+const Welcome = () => {
   const { navigate } = useNavigation<Nav>();
   const { colors, dark } = useTheme();
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress >= 1) {
-          clearInterval(intervalId);
-          return prevProgress;
-        }
-        return prevProgress + 0.5;
-      });
-    }, 2000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    if (progress >= 1) {
-      // Navigate to the onboarding3 screen 
-      navigate('onboarding2')
-    }
-  }, [progress, navigate]);
-
   return (
-    <SafeAreaView style={[Onboarding1Styles.container, { backgroundColor: colors.background }]}>
-      <PageContainer>
-        <View style={Onboarding1Styles.contentContainer}>
-          <Image
-            source={dark ? illustrations.onboarding1Dark : illustrations.onboarding1}
-            contentFit="contain"
-            style={Onboarding1Styles.illustration}
-          />
-          <View style={Onboarding1Styles.buttonContainer}>
-            <View style={Onboarding1Styles.titleContainer}>
-              <Text style={[Onboarding1Styles.title, { color: colors.text }]}>Manage all your finances in</Text>
-              <Text style={Onboarding1Styles.subTitle}>ONE PLACE</Text>
-            </View>
-
-            <Text style={[Onboarding1Styles.description, { color: colors.text }]}>
-              Track your spending, savings, and investments. With just a few taps, you're in control of your financial future.
-            </Text>
-
-            <View style={Onboarding1Styles.dotsContainer}>
-              {progress < 1 && <DotsView progress={progress} numDots={4} />}
-            </View>
-            <Button
-              title="Next"
-              filled
-              onPress={() => navigate('onboarding2')}
-              style={Onboarding1Styles.nextButton}
-            />
-            <Button
-              title="Skip"
-              onPress={() => navigate('login')}
-              textColor={COLORS.primary}
-              style={Onboarding1Styles.skipButton}
-            />
-          </View>
+    <SafeAreaView style={[styles.area, { backgroundColor: colors.background }]}>
+      <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <Image source={images.paylogo1} contentFit="contain" style={styles.logo} />
+        <Text style={[styles.title, { color: colors.text }]}>Welcome To Paynest!</Text>
+        <Text style={[styles.subtitle, { color: dark ? COLORS.white : "black" }]}>
+          Hello there, personalize your financial journey for maximum returns and peace of mind on paynest.
+        </Text>
+        <View style={{ marginVertical: 32 }}>
+          <SocialButtonV2 title="Create a account on Paynest" icon={images.paylogo1} onPress={() => navigate("signup")}
+            iconStyles={{ tintColor: dark ? COLORS.white : COLORS.black }} />
         </View>
-      </PageContainer>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={[styles.loginTitle, {
+            color: dark ? COLORS.white : "black"
+          }]}>Already have account? </Text>
+          <TouchableOpacity
+            onPress={() => navigate("login")}>
+            <Text style={styles.loginSubtitle}>Log In</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.bottomContainer}>
+        <Text style={[styles.bottomTitle, {
+          color: dark ? COLORS.white : COLORS.black }]}>
+          By continuing, you accept the Terms Of Use and
+        </Text>
+        <TouchableOpacity onPress={() => navigate("login")}>
+          <Text style={[styles.bottomSubtitle, {
+            color: dark ? COLORS.white : COLORS.black
+          }]}>Privacy Policy.</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
 
-export default Onboarding1;
+const styles = StyleSheet.create({
+  area: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    padding: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  logo: {
+    width: 100,
+    height: 100,
+    marginBottom: 22,
+    marginTop: -22,
+  },
+  title: {
+    fontSize: 28,
+    fontFamily: "bold",
+    color: COLORS.black,
+    marginVertical: 12,
+    textAlign: "center",
+  },
+  subtitle: {
+    fontSize: 12,
+    fontFamily: "regular",
+    color: "black",
+    textAlign: "center",
+    paddingHorizontal: 16,
+  },
+  loginTitle: {
+    fontSize: 14,
+    fontFamily: "regular",
+    color: "black",
+  },
+  loginSubtitle: {
+    fontSize: 14,
+    fontFamily: "semiBold",
+    color: COLORS.primary,
+  },
+  bottomContainer: {
+    position: "absolute",
+    bottom: 32,
+    right: 0,
+    left: 0,
+    width: SIZES.width - 32,
+    alignItems: "center",
+  },
+  bottomTitle: {
+    fontSize: 12,
+    fontFamily: "regular",
+    color: COLORS.black,
+  },
+  bottomSubtitle: {
+    fontSize: 12,
+    fontFamily: "regular",
+    color: COLORS.black,
+    textDecorationLine: "underline",
+    marginTop: 2,
+  },
+});
+
+export default Welcome;

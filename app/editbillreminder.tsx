@@ -18,7 +18,7 @@ const EditBillReminder = () => {
   const navigation = useNavigation();
   const route = useRoute(); 
   const { reminderToEdit } = route.params;
-  const { token } = useAuth();
+  const { userId,token } = useAuth();
 
   const [openStartDatePicker, setOpenStartDatePicker] = useState(false);
 
@@ -44,6 +44,7 @@ const EditBillReminder = () => {
     if (!billType || !amount || !dueDate) return;
   
     const updatedReminder = {
+      user_id: userId, // Keep the same ID to update the existing reminder
       id: reminderToEdit.id, // Keep the same ID to update the existing reminder
       bill_type: billType,
       amount: amount,
