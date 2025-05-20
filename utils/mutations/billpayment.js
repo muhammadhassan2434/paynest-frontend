@@ -4,6 +4,10 @@ import { apiCall } from "../cutomApiCall";
 
 
 
+export const ALL_PROVIDER_FOR_BILLPAYMENT = async (token) => {
+  const result = await apiCall(API_ENDPOINTS.BILLPAYMENT.FETCHALLPRIVDERFORBILLPAYMENT, "GET", null, token);
+  return result;
+};
 export const FETCH_ELECTRICITY_PROVIDER = async (token) => {
   const result = await apiCall(API_ENDPOINTS.BILLPAYMENT.FETCHELECTRICITYPROVIDER, "GET", null, token);
   return result;

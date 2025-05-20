@@ -25,10 +25,14 @@ export const API_ENDPOINTS = {
         DELETEBILLREMINDER: API_DOMAIN + 'delete/billreminder/{id}',
     },
     BILLPAYMENT:{
+        FETCHALLPRIVDERFORBILLPAYMENT: API_DOMAIN + 'service/provider/all/billpayment',
         FETCHELECTRICITYPROVIDER: API_DOMAIN + 'service/provider/electricity/bill',
         FETCHELGASPROVIDER: API_DOMAIN + 'service/provider/gas/bill',
         VALIDATECONSUMERNUMBER: API_DOMAIN + 'validate/consumer/number',
         STOREBILLPAYMENT: API_DOMAIN + 'billpayment/store',
+    },
+    SCHEDULEPAYMENT:{
+        STORESCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules',
     }
     
 

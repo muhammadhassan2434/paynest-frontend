@@ -13,7 +13,6 @@ import {
 import { useAuth } from "@/utils/hooks/AuthContext";
 import Header from "@/components/Header";
 import {
-  FETCH_ELECTRICITY_PROVIDER,
   FETCH_GAS_PROVIDER,
 } from "@/utils/mutations/billpayment";
 import useFetchServices from "@/hooks/services";
