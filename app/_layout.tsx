@@ -82,6 +82,7 @@ export default function RootLayout() {
             {/* shedulepayment routes */}
             <Stack.Screen name="schedulepaymentlistscreen" />
             <Stack.Screen name="addschedulepayment" />
+            <Stack.Screen name="scheduledetail" />
             {/* end */}
 
             {/* electricity bill routes */}
@@ -94,38 +95,20 @@ export default function RootLayout() {
             <Stack.Screen name="gasbilllist" />
             <Stack.Screen name="paybillgascustomerid" />
             <Stack.Screen name="paybillsgasreviewsummary" />
+            {/* end */}
 
-            <Stack.Screen name="notifications" />
+            {/* split bil routes */}
+            <Stack.Screen name="splitbillscreen" />
+            <Stack.Screen name="createsplitbill" />
+            <Stack.Screen name="splitbilldetail" />
+            <Stack.Screen name="splitbillrequest" />
+
             <Stack.Screen name="editprofile" />
             <Stack.Screen name="settingshelpcenter" />
-            <Stack.Screen name="settingssecurity" />
-            <Stack.Screen name="settingslanguage" />
-            <Stack.Screen name="settingsnotifications" />
-            <Stack.Screen name="changeemail" />
-            <Stack.Screen name="changepassword" />
             <Stack.Screen name="settingsprivacypolicy" />
+            <Stack.Screen name="changepassword" />
             <Stack.Screen name="settingsinvitefriends" />
             <Stack.Screen name="customerservice" />
-            <Stack.Screen name="allservices" />
-            <Stack.Screen name="paybillsinternetcustomerid" />
-            <Stack.Screen name="paybillsinternetreviewsummary" />
-            <Stack.Screen name="paybillswatercustomerid" />
-            <Stack.Screen name="paybillswaterreviewsummary" />
-            <Stack.Screen name="paybillssuccessful" />
-            <Stack.Screen name="requestmoney" />
-            <Stack.Screen name="requestmoneyamount" />
-            <Stack.Screen name="requestmoneysuccessful" />
-            <Stack.Screen name="sendmoney" />
-            <Stack.Screen name="sendmoneytypeamount" />
-            <Stack.Screen name="sendmoneychoosepaymenttype" />
-            <Stack.Screen name="sendmoneyreviewsummary" />
-            <Stack.Screen name="sendmoneysuccessful" />
-            <Stack.Screen name="inoutpaymenthistory" />
-            <Stack.Screen name="inoutpaymentviewereceipt" />
-            <Stack.Screen name="statisticsversion2" />
-            <Stack.Screen name="statisticsversion3" />
-            <Stack.Screen name="statisticsversion4" />
-            <Stack.Screen name="userallpay" />
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="+not-found" />
           </Stack>

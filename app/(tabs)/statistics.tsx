@@ -7,17 +7,18 @@ import { useTheme } from '@/theme/ThemeProvider';
 import { useNavigation } from 'expo-router';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 import { AnalyticsMonthV1, AnalyticsQuarterV1, AnalyticsYearToYearV1, AnalyticsYearV1 } from '@/tabs';
+import { useAuth } from '@/utils/hooks/AuthContext';
 
 const renderScene = SceneMap({
   first: AnalyticsMonthV1,
   second: AnalyticsQuarterV1,
   third: AnalyticsYearV1,
-  fourth: AnalyticsYearToYearV1
 });
 
 type Nav = {
   navigate: (value: string) => void
 }
+
 
 const Statistics = () => {
   const { navigate } = useNavigation<Nav>();
@@ -25,11 +26,11 @@ const Statistics = () => {
   const layout = useWindowDimensions();
   const [index, setIndex] = React.useState(0);
 
+  const {account, userId, token } = useAuth();
   const [routes] = React.useState([
     { key: 'first', title: 'Month' },
     { key: 'second', title: 'Quarter' },
     { key: 'third', title: 'Year' },
-    { key: 'fourth', title: 'YTY' }
   ]);
 
   const renderTabBar = (props: any) => (
@@ -61,25 +62,13 @@ const Statistics = () => {
       <View style={styles.headerContainer}>
         <View style={styles.headerLeft}>
           <Image
-            source={images.logo}
+            source={images.paylogo1}
             contentFit='contain'
             style={styles.headerLogo}
           />
           <Text style={[styles.headerTitle, {
             color: dark ? COLORS.white : COLORS.greyscale900
           }]}>Analytics</Text>
-        </View>
-        <View style={styles.headerRight}>
-          <TouchableOpacity
-            onPress={() => navigate("invoicesettings")}>
-            <Image
-              source={icons.moreCircle}
-              contentFit='contain'
-              style={[styles.searchIcon, {
-                tintColor: dark ? COLORS.secondaryWhite : COLORS.greyscale900
-              }]}
-            />
-          </TouchableOpacity>
         </View>
       </View>
     )
@@ -123,9 +112,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   headerLogo: {
-    height: 24,
-    width: 24,
-    tintColor: COLORS.primary
+    height: 34,
+    width: 34,
   },
   headerTitle: {
     fontSize: 22,

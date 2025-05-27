@@ -33,7 +33,22 @@ export const API_ENDPOINTS = {
     },
     SCHEDULEPAYMENT:{
         STORESCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules',
-    }
+        GETALLCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/all',
+        GETEXECUTEDCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/executed',
+        GETCANCELLEEDCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/cancelled',
+        GETFAILEDCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/failed',
+        GETREFUNDEDCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/refunded',
+        REFUNDCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/refund/{id}',
+        CANCELCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/cancel/{id}',
+        REFUNDBACKCHEDULEPAYMENT: API_DOMAIN + 'payment-schedules/refund-back/{id}',
+    }, 
+    SPLITBILLL:{
+        GETALLSPLITBILL: API_DOMAIN + 'get/all/split-bills/{id}',
+        GETTRANSFEREDSPLITBILL: API_DOMAIN + 'get/transferred/split-bills/{id}',
+        CREATESPLITBILL: API_DOMAIN + 'split-bills',
+        MYSPLITBILLREQUESTS: API_DOMAIN + 'split-bill/requests/{id}',
+        PAYSPLITBILL: API_DOMAIN + 'pay/split-bill',    
+    },
     
 
 

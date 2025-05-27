@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView } from 'react-native-virtualized-view';
 import { useTheme } from '@/theme/ThemeProvider';
@@ -13,6 +13,8 @@ import { useAuth } from '@/utils/hooks/AuthContext';
 import useAuthMiddleware from '@/utils/hooks/useAuthMiddleware';
 import { FETCH_SERVICES } from "@/utils/mutations/servicesmutation"; 
 import useFetchServices from '@/hooks/services';
+import Voice from '@react-native-voice/voice';
+import { Alert, PermissionsAndroid, Platform } from 'react-native';
 
 type Nav = {
   navigate: (value: string) => void
@@ -66,8 +68,72 @@ const HomeScreen = () => {
     "Schedule Payment": "schedulepaymentlistscreen",
     "Electricity bill": "electricitybilllist",
     "Gas bill": "gasbilllist",
+    "Split bill": "splitbillscreen",
     // ...
   };
+
+  const [isListening, setIsListening] = useState(false);
+
+useEffect(() => {
+  Voice.onSpeechResults = onSpeechResults;
+  Voice.onSpeechError = onSpeechError;
+
+  return () => {
+    Voice.destroy().then(Voice.removeAllListeners);
+  };
+}, []);
+
+const onSpeechResults = (event: any) => {
+  const command = event.value?.[0]?.toLowerCase();
+  console.log('Voice command:', command);
+
+  if (!command) return;
+
+  if (command.includes("transfer")) {
+    navigation.navigate("paynesttransferid");
+  } else if (command.includes("split")) {
+    navigation.navigate("splitbillrequest");
+  } else if (command.includes("balance")) {
+    toggleBalanceVisibility();
+  } else {
+    Alert.alert("Unrecognized Command", command);
+  }
+};
+
+const onSpeechError = (event: any) => {
+  console.error('Voice error:', event.error);
+};
+
+const startListening = async () => {
+  try {
+    if (Platform.OS === 'android') {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.RECORD_AUDIO
+      );
+      if (granted !== PermissionsAndroid.RESULTS.GRANTED) return;
+    }
+    setIsListening(true);
+    await Voice.start('en-US');
+  } catch (error) {
+    console.error('Start error:', error);
+  }
+};
+
+const stopListening = async () => {
+  try {
+    await Voice.stop();
+    setIsListening(false);
+  } catch (error) {
+    console.error('Stop error:', error);
+  }
+};
+
+if (!Voice) {
+  console.error('Voice module is not available');
+  return;
+}
+
+
   
   
   /**
@@ -136,7 +202,7 @@ const HomeScreen = () => {
             </View>
             <Text style={styles.categoryText}>Transfer</Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => navigation.navigate("paynesttransferid")}
             style={styles.categoryContainer}>
             <View style={styles.categoryIconContainer}>
@@ -146,10 +212,10 @@ const HomeScreen = () => {
                 style={styles.categoryIcon}
               />
             </View>
-            <Text style={styles.categoryText}>Send</Text>
-          </TouchableOpacity>
+            <Text style={styles.categoryText}>Schedule</Text>
+          </TouchableOpacity> */}
           <TouchableOpacity
-            onPress={() => navigation.navigate("")}
+            onPress={() => navigation.navigate("splitbillrequest")}
             style={styles.categoryContainer}>
             <View style={styles.categoryIconContainer}>
               <Image
@@ -158,19 +224,20 @@ const HomeScreen = () => {
                 style={styles.categoryIcon}
               />
             </View>
-            <Text style={styles.categoryText}>Request</Text>
+            <Text style={styles.categoryText}>Split Request</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("")}
+            onPress={isListening ? stopListening : startListening}
             style={styles.categoryContainer}>
             <View style={styles.categoryIconContainer}>
               <Image
-                source={icons.swapUpDown}
+                source={icons.microphone}
                 contentFit='contain'
                 style={styles.categoryIcon}
               />
             </View>
-            <Text style={styles.categoryText}>In & Out</Text>
+            <Text style={styles.categoryText}>    {isListening ? 'Stop' : 'Voice'}
+</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -184,8 +251,8 @@ const HomeScreen = () => {
       <View>
         <SubHeaderItem
           title="Services"
-          navTitle="See all"
-          onPress={() => navigate("allservices")}
+          navTitle=""
+          onPress={() => navigate("")}
         />
        <FlatList
         data={services.slice(0, 8)}

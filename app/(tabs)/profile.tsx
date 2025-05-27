@@ -50,18 +50,6 @@ const Profile = () => {
             Profile
           </Text>
         </View>
-        <TouchableOpacity>
-          <Image
-            source={icons.moreCircle}
-            contentFit="contain"
-            style={[
-              styles.headerIcon,
-              {
-                tintColor: dark ? COLORS.secondaryWhite : COLORS.greyscale900,
-              },
-            ]}
-          />
-        </TouchableOpacity>
       </TouchableOpacity>
     );
   };
@@ -138,51 +126,13 @@ const Profile = () => {
         <SettingsItem
           icon={icons.userOutline}
           name="Edit Profile"
-          onPress={() => navigate("")}
-        />
-        <SettingsItem
-          icon={icons.bell2}
-          name="Notification"
-          onPress={() => navigate("")}
+          onPress={() => navigate("editprofile")}
         />
         <SettingsItem
           icon={icons.wallet2Outline}
-          name="Payment"
-          onPress={() => navigate("")}
+          name="Payments"
+          onPress={() => navigate("statistics")}
         />
-        <SettingsItem
-          icon={icons.shieldOutline}
-          name="Security"
-          onPress={() => navigate("")}
-        />
-        {/* <TouchableOpacity
-          onPress={() => navigate("settingslanguage")}
-          style={styles.settingsItemContainer}>
-          <View style={styles.leftContainer}>
-            <Image
-              source={icons.more}
-              contentFit='contain'
-              style={[styles.settingsIcon, {
-                tintColor: dark ? COLORS.white : COLORS.greyscale900
-              }]}
-            />
-            <Text style={[styles.settingsName, {
-              color: dark ? COLORS.white : COLORS.greyscale900
-            }]}>Language & Region</Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <Text style={[styles.rightLanguage, {
-              color: dark ? COLORS.white : COLORS.greyscale900
-            }]}>English (US)</Text>
-            <Image
-              source={icons.arrowRight}
-              contentFit='contain'
-              style={[styles.settingsArrowRight, {
-                tintColor: dark ? COLORS.white : COLORS.greyscale900
-              }]}
-            />
-          </View>
-        </TouchableOpacity> */}
         <TouchableOpacity style={styles.settingsItemContainer}>
           <View style={styles.leftContainer}>
             <Image
