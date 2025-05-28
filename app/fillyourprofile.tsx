@@ -128,7 +128,7 @@ const FillYourProfile = () => {
       <View style={[styles.container, { backgroundColor: colors.background }]}>
         <Header title="Fill Your Profile" />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ alignItems: "center", marginVertical: 12 }}>
+          {/* <View style={{ alignItems: "center", marginVertical: 12 }}>
             <View style={styles.avatarContainer}>
               <Image
                 source={image === null ? icons.userDefault2 : image}
@@ -143,7 +143,7 @@ const FillYourProfile = () => {
                 />
               </TouchableOpacity>
             </View>
-          </View>
+          </View> */}
           <Input
             id="paynest_id"
             onInputChanged={inputChangedHandler}

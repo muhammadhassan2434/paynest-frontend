@@ -107,7 +107,6 @@ export default function RootLayout() {
             <Stack.Screen name="settingshelpcenter" />
             <Stack.Screen name="settingsprivacypolicy" />
             <Stack.Screen name="changepassword" />
-            <Stack.Screen name="settingsinvitefriends" />
             <Stack.Screen name="customerservice" />
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="+not-found" />

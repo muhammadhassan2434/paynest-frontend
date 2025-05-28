@@ -49,6 +49,12 @@ export const API_ENDPOINTS = {
         MYSPLITBILLREQUESTS: API_DOMAIN + 'split-bill/requests/{id}',
         PAYSPLITBILL: API_DOMAIN + 'pay/split-bill',    
     },
+    PROFILE:{
+        EDITPROFILE: API_DOMAIN + 'edit/profile/{id}',
+        UPDATEPROFILE: API_DOMAIN + 'update/profile/{id}',
+        UPDATEPASSWORD: API_DOMAIN + 'update/password/{id}',
+
+    }
     
 
 

@@ -236,8 +236,7 @@ if (!Voice) {
                 style={styles.categoryIcon}
               />
             </View>
-            <Text style={styles.categoryText}>    {isListening ? 'Stop' : 'Voice'}
-</Text>
+            <Text style={styles.categoryText}>{isListening ? 'Stop' : 'Voice'}</Text>
           </TouchableOpacity>
         </View>
       </View>

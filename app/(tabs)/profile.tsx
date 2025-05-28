@@ -117,16 +117,15 @@ const Profile = () => {
 
     return (
       <View style={styles.settingsContainer}>
-        {/* <SettingsItem
-          icon={icons.bell3}
-          name="My Notification"
-          onPress={() => navigate("notifications")}
-        /> */}
-
         <SettingsItem
           icon={icons.userOutline}
           name="Edit Profile"
           onPress={() => navigate("editprofile")}
+        />
+        <SettingsItem
+          icon={icons.padlock}
+          name="Change Password"
+          onPress={() => navigate("changepassword")}
         />
         <SettingsItem
           icon={icons.wallet2Outline}
